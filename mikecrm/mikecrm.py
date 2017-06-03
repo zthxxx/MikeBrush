@@ -28,12 +28,13 @@ class Mikecrm:
         proxy_address = {proxy_type: '%s:%s' % (ip, port)}
         proxy = request.ProxyHandler(proxy_address)
         opener = request.build_opener(proxy)
-        request.install_opener(opener)
+        opener.addheaders = [("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64)")]
+        self.opener = opener
         return self
 
     def submit(self, timeout=10):
         try:
-            page = request.urlopen(self.req, timeout=timeout).read()
+            page = self.opener.open(self.req, timeout=timeout).read()
         except Exception as e:
             logging.error('%s ERROR OF [%s]' % (self.proxy_ip, e))
             return False
