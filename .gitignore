@@ -1,0 +1,13 @@
+.idea/
+__pycache__/
+venv/
+.project
+.coverage
+*.pyc
+*.db
+*.bak
+*.log
+*.out
+*.csv
+*.json
+!*unit_test.json
