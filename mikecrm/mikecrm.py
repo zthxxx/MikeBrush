@@ -29,15 +29,23 @@ class Mikecrm:
         proxy = request.ProxyHandler(proxy_address)
         opener = request.build_opener(proxy)
         request.install_opener(opener)
+        return self
 
-    def submit(self):
-        page = request.urlopen(self.req).read()
+    def submit(self, timeout=10):
+        try:
+            page = request.urlopen(self.req, timeout=timeout).read()
+        except Exception as e:
+            logging.error('%s ERROR OF [%s]' % (self.proxy_ip, e))
+            return False
         resporse = page.decode('utf-8')
         try:
             result = json.loads(resporse)
             if result['r'] == 0:
                 logging.info('%s  OK!' % self.proxy_ip)
+                return True
             elif result['r'] == -827:
                 logging.warning('%s has exist submited yet!' % self.proxy_ip)
+                return False
         except:
             logging.error(resporse)
+            return False
