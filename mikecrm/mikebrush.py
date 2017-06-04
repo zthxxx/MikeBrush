@@ -23,7 +23,7 @@ class MikeBrush():
         while not proxys.empty():
             proxy = proxys.get_nowait()
             self.total += 1
-            if brush.set_proxy(*proxy).submit(timeout=6):
+            if brush.set_proxy(*proxy).submit():
                 self.votes += 1
             logging.info('Current successes count is %d / %d' % (self.votes, self.total))
         logging.info('Brush thead-%d : task complete!' % index)

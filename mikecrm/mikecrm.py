@@ -24,7 +24,7 @@ class Mikecrm:
         data = parse.urlencode(data).encode('utf-8')
         self.req = request.Request(submit_url, headers=headers, data=data)
 
-    def set_proxy(self, ip, port=None, proxy_type='http,https'):
+    def set_proxy(self, ip, port=None, proxy_type='http,https,sock4,sock5'):
         if not port:
             ipre = re.compile(r'^(?<![\.\d])(?:\d{1,3}\.){3}\d{1,3}(?![\.\d]):\d{1,5}$')
             if ipre.match(ip):
