@@ -21,9 +21,8 @@ class MikeBrush():
         brush = Mikecrm(**self.target)
         logging.info('Brush thead-%d : task started!' % index)
         while not proxys.empty():
-            item = proxys.get_nowait()
+            proxy = proxys.get_nowait()
             self.total += 1
-            proxy = (item['type'], item['ip'], item['port'])
             if brush.set_proxy(*proxy).submit(timeout=6):
                 self.votes += 1
             logging.info('Current successes count is %d / %d' % (self.votes, self.total))
