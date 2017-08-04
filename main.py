@@ -18,7 +18,9 @@ proxys_list = csv.read_list_csv(None, proxy_file)
 if __name__ == "__main__":
     proxys = queue.Queue()
     for item in proxys_list:
+        ## if use proxy json
         # proxy = (item['ip'], item['port'], item['type'])
+        # proxys.put(proxy)
         proxys.put(item)
     brush = MikeBrush(target, proxys, thead_count)
     brush.run()
